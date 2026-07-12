@@ -362,6 +362,8 @@ function build() {
     writeFile(path.join(dir, "datenschutz.html"), renderLegal(lang, "datenschutz")); count++;
     writeFile(path.join(dir, "agb.html"), renderLegal(lang, "agb")); count++;
   }
+  // custom domain (keeps the domain bound across GitHub-Actions deploys)
+  fs.writeFileSync(path.join(DIST, "CNAME"), "homecare-zadar.com\n");
   // root redirect -> German
   writeFile(path.join(DIST, "index.html"),
     `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Croatian Home Care</title>` +
