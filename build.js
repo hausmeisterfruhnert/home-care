@@ -4,7 +4,7 @@
 // ============================================================
 const fs = require("fs");
 const path = require("path");
-const { LANGS, BRAND, CONTACT, SKIPPER_URL, FORM_ENDPOINT, MAP_SRC, IMAGES, PAGES, NAV, UI } = require("./src/data.js");
+const { LANGS, BASE_URL, GSC_VERIFICATION, BRAND, CONTACT, SKIPPER_URL, FORM_ENDPOINT, MAP_SRC, IMAGES, PAGES, NAV, UI } = require("./src/data.js");
 const { content } = require("./src/content.js");
 
 const DIST = path.join(__dirname, "dist");
@@ -32,10 +32,14 @@ function layout(lang, pageKey, main) {
 <title>${meta.t}</title>
 <meta name="description" content="${meta.d}">
 <meta name="robots" content="index,follow">
-<meta name="geo.region" content="HR-13"><meta name="geo.placename" content="Zadar">
+${GSC_VERIFICATION ? `<meta name="google-site-verification" content="${GSC_VERIFICATION}">\n` : ""}<meta name="geo.region" content="HR-13"><meta name="geo.placename" content="Zadar">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${meta.t}">
 <meta property="og:description" content="${meta.d}">
+<meta property="og:url" content="${BASE_URL}/${lang}/${file}">
+<link rel="canonical" href="${BASE_URL}/${lang}/${file}">
+${LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${BASE_URL}/${l}/${file}">`).join("\n")}
+<link rel="alternate" hreflang="x-default" href="${BASE_URL}/de/${file}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -364,6 +368,21 @@ function build() {
   }
   // custom domain (keeps the domain bound across GitHub-Actions deploys)
   fs.writeFileSync(path.join(DIST, "CNAME"), "homecare-zadar.com\n");
+
+  // robots.txt + sitemap.xml (SEO)
+  fs.writeFileSync(path.join(DIST, "robots.txt"),
+    `User-agent: *\nAllow: /\n\nSitemap: ${BASE_URL}/sitemap.xml\n`);
+  const urls = [];
+  for (const p of PAGES) {
+    const alts = LANGS.map(l => `    <xhtml:link rel="alternate" hreflang="${l}" href="${BASE_URL}/${l}/${p.file}"/>`).join("\n")
+      + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}/de/${p.file}"/>`;
+    for (const l of LANGS) {
+      const pr = p.key === "index" ? "1.0" : "0.7";
+      urls.push(`  <url>\n    <loc>${BASE_URL}/${l}/${p.file}</loc>\n${alts}\n    <changefreq>monthly</changefreq>\n    <priority>${pr}</priority>\n  </url>`);
+    }
+  }
+  fs.writeFileSync(path.join(DIST, "sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join("\n")}\n</urlset>\n`);
   // root redirect -> German
   writeFile(path.join(DIST, "index.html"),
     `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Croatian Home Care</title>` +

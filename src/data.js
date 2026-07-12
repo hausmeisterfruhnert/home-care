@@ -4,6 +4,13 @@
 
 const LANGS = ["de", "hr", "en"];
 
+// Live base URL (no trailing slash) — used for canonical, hreflang & sitemap.
+const BASE_URL = "https://homecare-zadar.com";
+
+// Google Search Console verification code (from the "HTML tag" method).
+// Paste the content value here (just the token) to add the meta tag on every page.
+const GSC_VERIFICATION = "";
+
 const BRAND = {
   big: "Croatian Home Care",
   small: "Skipper &amp; Boat Rent &middot; Zadar",
@@ -121,4 +128,4 @@ const UI = {
   },
 };
 
-module.exports = { LANGS, BRAND, CONTACT, SKIPPER_URL, FORM_ENDPOINT, MAP_SRC, IMAGES, PAGES, NAV, UI };
+module.exports = { LANGS, BASE_URL, GSC_VERIFICATION, BRAND, CONTACT, SKIPPER_URL, FORM_ENDPOINT, MAP_SRC, IMAGES, PAGES, NAV, UI };
