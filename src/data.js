@@ -21,6 +21,13 @@ const CONTACT = {
 // Link to the sister site (Skipper) — live domain (served over http).
 const SKIPPER_URL = "http://skipper-zadar.com/";
 
+// Contact form -> email (FormSubmit, free, no backend). AJAX endpoint keeps the
+// visitor on the page. First submission triggers a one-time confirmation email.
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/fruhnert.service.zadar@gmail.com";
+
+// Google Maps embed (no API key needed) for the contact page.
+const MAP_SRC = "https://www.google.com/maps?q=Ul.%20Ante%20Trumbi%C4%87a%2026%2C%2023000%20Zadar&output=embed";
+
 const IMAGES = {
   logo: "../assets/logo.jpg",
   zadarDusk: "../assets/zadar-dusk.jpg",
@@ -70,7 +77,9 @@ const UI = {
     formTopicOpts: ["Bitte w&auml;hlen &hellip;", "Schl&uuml;sselservice &amp; Objektkontrolle", "G&auml;ste Check-in / Check-out", "Reinigung &amp; W&auml;sche", "Instandhaltung &amp; Reparaturen", "Verwaltung &amp; Beh&ouml;rden", "Insel-Service per Boot", "Komplette Rundum-Betreuung", "Klingelschilder", "Sonstiges"],
     formMsg: "Ihre Nachricht", formMsgPh: "Was d&uuml;rfen wir f&uuml;r Ihr Objekt tun?",
     formSend: "Anfrage senden",
-    formNote: "Vielen Dank! Bitte melden Sie sich vorerst direkt per WhatsApp, Telefon oder E-Mail &ndash; das Formular wird noch angebunden.",
+    formNote: "Vielen Dank! Ihre Anfrage ist bei uns eingegangen &ndash; wir melden uns zeitnah bei Ihnen.",
+    formErr: "Da ist etwas schiefgelaufen. Bitte melden Sie sich direkt per WhatsApp, Telefon oder E-Mail.",
+    mapTitle: "So finden Sie uns",
   },
   hr: {
     anfrage: "Upit", anfrageBtn: "Zatra&#382;ite ponudu", callBtn: "Nazovite odmah",
@@ -87,7 +96,9 @@ const UI = {
     formTopicOpts: ["Odaberite &hellip;", "Usluga klju&#269;a i kontrola objekta", "Prijava / odjava gostiju", "&#268;i&#353;&#263;enje i rublje", "Odr&#382;avanje i popravci", "Administracija i slu&#382;be", "Oto&#269;na usluga brodom", "Potpuna briga", "Plo&#269;ice za zvono", "Ostalo"],
     formMsg: "Va&#353;a poruka", formMsgPh: "&#352;to mo&#382;emo u&#269;initi za va&#353;u nekretninu?",
     formSend: "Po&#353;alji upit",
-    formNote: "Hvala! Za sada nam se javite izravno putem WhatsAppa, telefona ili e-maila &ndash; obrazac se jo&#353; povezuje.",
+    formNote: "Hvala! Va&#353; upit je zaprimljen &ndash; javljamo vam se ubrzo.",
+    formErr: "Ne&#353;to je po&#353;lo po zlu. Molimo javite se izravno putem WhatsAppa, telefona ili e-maila.",
+    mapTitle: "Gdje se nalazimo",
   },
   en: {
     anfrage: "Enquiry", anfrageBtn: "Request a quote", callBtn: "Call now",
@@ -104,8 +115,10 @@ const UI = {
     formTopicOpts: ["Please select &hellip;", "Key service &amp; property checks", "Guest check-in / check-out", "Cleaning &amp; laundry", "Maintenance &amp; repairs", "Administration &amp; authorities", "Island service by boat", "Complete all-round care", "Doorbell nameplates", "Other"],
     formMsg: "Your message", formMsgPh: "What can we do for your property?",
     formSend: "Send enquiry",
-    formNote: "Thank you! For now please reach us directly via WhatsApp, phone or email &ndash; the form is still being connected.",
+    formNote: "Thank you! Your enquiry has reached us &ndash; we&rsquo;ll get back to you shortly.",
+    formErr: "Something went wrong. Please reach us directly via WhatsApp, phone or email.",
+    mapTitle: "Where to find us",
   },
 };
 
-module.exports = { LANGS, BRAND, CONTACT, SKIPPER_URL, IMAGES, PAGES, NAV, UI };
+module.exports = { LANGS, BRAND, CONTACT, SKIPPER_URL, FORM_ENDPOINT, MAP_SRC, IMAGES, PAGES, NAV, UI };

@@ -4,7 +4,7 @@
 // ============================================================
 const fs = require("fs");
 const path = require("path");
-const { LANGS, BRAND, CONTACT, SKIPPER_URL, IMAGES, PAGES, NAV, UI } = require("./src/data.js");
+const { LANGS, BRAND, CONTACT, SKIPPER_URL, FORM_ENDPOINT, MAP_SRC, IMAGES, PAGES, NAV, UI } = require("./src/data.js");
 const { content } = require("./src/content.js");
 
 const DIST = path.join(__dirname, "dist");
@@ -302,15 +302,23 @@ function renderKontakt(lang) {
       </div>
       <div style="margin-top:18px"><a class="btn btn-wa btn-lg" href="${waLink(lang)}" target="_blank" rel="noopener">${waIcon}${ui.waWrite}</a></div>
     </div>
-    <form class="form" id="contactForm">
-      <label for="n">${ui.formName}</label><input id="n" type="text" placeholder="${ui.formNamePh}">
-      <label for="e">${ui.formEmail}</label><input id="e" type="email" placeholder="${ui.formEmailPh}">
-      <label for="o">${ui.formObject}</label><input id="o" type="text" placeholder="${ui.formObjectPh}">
-      <label for="t">${ui.formTopic}</label><select id="t">${ui.formTopicOpts.map((o,i)=>`<option${i===0?' value="" selected':''}>${o}</option>`).join("")}</select>
-      <label for="m">${ui.formMsg}</label><textarea id="m" placeholder="${ui.formMsgPh}"></textarea>
+    <form class="form" id="contactForm" action="${FORM_ENDPOINT}" method="POST">
+      <label for="n">${ui.formName}</label><input id="n" name="Name" type="text" placeholder="${ui.formNamePh}" required>
+      <label for="e">${ui.formEmail}</label><input id="e" name="email" type="email" placeholder="${ui.formEmailPh}" required>
+      <label for="o">${ui.formObject}</label><input id="o" name="Objekt" type="text" placeholder="${ui.formObjectPh}">
+      <label for="t">${ui.formTopic}</label><select id="t" name="Anliegen">${ui.formTopicOpts.map((o,i)=>`<option${i===0?' value="" selected':''}>${o}</option>`).join("")}</select>
+      <label for="m">${ui.formMsg}</label><textarea id="m" name="Nachricht" placeholder="${ui.formMsgPh}"></textarea>
+      <input type="hidden" name="_subject" value="Neue Anfrage &ndash; Home Care Website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-top:16px" type="submit">${ui.formSend}</button>
       <p id="formNote" class="notice" style="display:none;margin-top:14px">${ui.formNote}</p>
+      <p id="formErr" class="notice" style="display:none;margin-top:14px;background:#fdecea;border-color:#f5c6c2;border-left-color:#e05b4b;color:#8a2c22">${ui.formErr}</p>
     </form>
+  </div>
+  <div style="margin-top:34px">
+    <span class="eyebrow">${ui.mapTitle}</span>
+    <div class="map-embed" style="margin-top:12px"><iframe src="${MAP_SRC}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="${ui.mapTitle}"></iframe></div>
   </div>
 </div></section>`;
   return layout(lang, "kontakt", main);
@@ -322,7 +330,6 @@ function renderLegal(lang, key) {
   const blocks = c.blocks.map(b => `<h2>${b.h}</h2><p>${b.p}</p>`).join("\n");
   const main = `<section class="page-hero"><div class="container"><h1>${c.h1}</h1></div></section>
 <section><div class="container"><div class="prose">
-  <div class="notice" style="margin-bottom:22px">${c.note}</div>
   ${blocks}
 </div></div></section>`;
   return layout(lang, key, main);

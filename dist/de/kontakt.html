@@ -50,15 +50,23 @@
       </div>
       <div style="margin-top:18px"><a class="btn btn-wa btn-lg" href="https://wa.me/385997806063?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihren%20Home-Care%20Service." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2z"/></svg>WhatsApp schreiben</a></div>
     </div>
-    <form class="form" id="contactForm">
-      <label for="n">Name</label><input id="n" type="text" placeholder="Ihr Name">
-      <label for="e">E-Mail</label><input id="e" type="email" placeholder="ihre@email.de">
-      <label for="o">Wo liegt Ihr Objekt?</label><input id="o" type="text" placeholder="z.B. Zadar, Ugljan, Dugi Otok &hellip;">
-      <label for="t">Wof&uuml;r kontaktieren Sie uns?</label><select id="t"><option value="" selected>Bitte w&auml;hlen &hellip;</option><option>Schl&uuml;sselservice &amp; Objektkontrolle</option><option>G&auml;ste Check-in / Check-out</option><option>Reinigung &amp; W&auml;sche</option><option>Instandhaltung &amp; Reparaturen</option><option>Verwaltung &amp; Beh&ouml;rden</option><option>Insel-Service per Boot</option><option>Komplette Rundum-Betreuung</option><option>Klingelschilder</option><option>Sonstiges</option></select>
-      <label for="m">Ihre Nachricht</label><textarea id="m" placeholder="Was d&uuml;rfen wir f&uuml;r Ihr Objekt tun?"></textarea>
+    <form class="form" id="contactForm" action="https://formsubmit.co/ajax/fruhnert.service.zadar@gmail.com" method="POST">
+      <label for="n">Name</label><input id="n" name="Name" type="text" placeholder="Ihr Name" required>
+      <label for="e">E-Mail</label><input id="e" name="email" type="email" placeholder="ihre@email.de" required>
+      <label for="o">Wo liegt Ihr Objekt?</label><input id="o" name="Objekt" type="text" placeholder="z.B. Zadar, Ugljan, Dugi Otok &hellip;">
+      <label for="t">Wof&uuml;r kontaktieren Sie uns?</label><select id="t" name="Anliegen"><option value="" selected>Bitte w&auml;hlen &hellip;</option><option>Schl&uuml;sselservice &amp; Objektkontrolle</option><option>G&auml;ste Check-in / Check-out</option><option>Reinigung &amp; W&auml;sche</option><option>Instandhaltung &amp; Reparaturen</option><option>Verwaltung &amp; Beh&ouml;rden</option><option>Insel-Service per Boot</option><option>Komplette Rundum-Betreuung</option><option>Klingelschilder</option><option>Sonstiges</option></select>
+      <label for="m">Ihre Nachricht</label><textarea id="m" name="Nachricht" placeholder="Was d&uuml;rfen wir f&uuml;r Ihr Objekt tun?"></textarea>
+      <input type="hidden" name="_subject" value="Neue Anfrage &ndash; Home Care Website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-top:16px" type="submit">Anfrage senden</button>
-      <p id="formNote" class="notice" style="display:none;margin-top:14px">Vielen Dank! Bitte melden Sie sich vorerst direkt per WhatsApp, Telefon oder E-Mail &ndash; das Formular wird noch angebunden.</p>
+      <p id="formNote" class="notice" style="display:none;margin-top:14px">Vielen Dank! Ihre Anfrage ist bei uns eingegangen &ndash; wir melden uns zeitnah bei Ihnen.</p>
+      <p id="formErr" class="notice" style="display:none;margin-top:14px;background:#fdecea;border-color:#f5c6c2;border-left-color:#e05b4b;color:#8a2c22">Da ist etwas schiefgelaufen. Bitte melden Sie sich direkt per WhatsApp, Telefon oder E-Mail.</p>
     </form>
+  </div>
+  <div style="margin-top:34px">
+    <span class="eyebrow">So finden Sie uns</span>
+    <div class="map-embed" style="margin-top:12px"><iframe src="https://www.google.com/maps?q=Ul.%20Ante%20Trumbi%C4%87a%2026%2C%2023000%20Zadar&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="So finden Sie uns"></iframe></div>
   </div>
 </div></section>
 
